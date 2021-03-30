@@ -1,27 +1,26 @@
 let todoArray = [];
+let todoForm = document.getElementById("todoForm");
 let listDiv = document.getElementById("list");
-let addButton = document.getElementById("add");
-addButton.onclick = addTodo;
+let userInput = document.getElementById("userInput");
+todoForm.addEventListener("submit", addTodo);
 
-function addTodo(){
-
-    const todoDiv = document.createElement("div");
-    let userInput = document.getElementById("userInput");
+function addTodo(event){
     let inputObject = {todo: userInput.value, done: false};
     todoArray.push(inputObject);
-    console.log(todoArray);
-    // userInput.addEventListener("keyup", function(event){
-    //     if (event.keyCode === 13) {
-    //         document.getElementById("add").click();
-    //     }
-    // });
+    userInput.value ="";
     display();
-    function display(){
-        for(i=0; i<todoArray.length; i++){
-            todoDiv.innerHTML= todoArray[i].todo;
-        }
-        listDiv.appendChild(todoDiv);
-    }
-    
+    event.preventDefault();
+
 }
+
+function display(){
+    const todoDiv = document.createElement("div");
+    for(var i=0; i<todoArray.length; i++){
+        todoDiv.innerHTML= todoArray[i].todo;
+    }
+    listDiv.appendChild(todoDiv);
+}
+
+
+
 
