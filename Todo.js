@@ -1,7 +1,9 @@
 let todoArray = [];
+let listDiv = document.getElementById("list");
+let addButton = document.getElementById("add");
+addButton.onclick = addTodo;
 
 function addTodo(){
-    let listDiv = document.getElementById("list");
 
     const todoDiv = document.createElement("div");
     let userInput = document.getElementById("userInput");
