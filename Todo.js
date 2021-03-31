@@ -16,11 +16,7 @@ function addTodo(event){
 
 function display(){
     const todoList = document.createElement("li");
-    for(var i=0; i<todoArray.length; i++){
-        todoList.innerHTML= todoArray[i].todo;
-
-    }
-    console.log(todoList);
+        todoList.innerHTML= todoArray[todoArray.length -1].todo;
     listDiv.appendChild(todoList);
 
 }
