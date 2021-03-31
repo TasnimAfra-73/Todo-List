@@ -15,15 +15,12 @@ function addTodo(event){
 }
 
 function display(){
-    const todoDiv = document.createElement("div");
     const todoList = document.createElement("li");
     for(var i=0; i<todoArray.length; i++){
-        todoDiv.innerHTML= todoArray[i].todo;
+        todoList.innerHTML= todoArray[i].todo;
 
     }
     console.log(todoList);
-    todoList.appendChild(todoDiv);
-
     listDiv.appendChild(todoList);
 
 }
