@@ -11,6 +11,7 @@ function addTodo(event){
     userInput.value ="";
     display();
     event.preventDefault();
+    localStorage.setItem("todo", JSON.stringify(todoArray));
 
 }
 
