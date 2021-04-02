@@ -7,7 +7,7 @@ todoForm.addEventListener("submit", addTodo);
 getData();
 
 function addTodo(event) {
-  if(userInput.value === ""){
+  if (userInput.value === "") {
     alert("Add a todo");
     return;
   }
@@ -15,14 +15,22 @@ function addTodo(event) {
   todoArray.push(inputObject);
   userInput.value = "";
   saveData();
-  display();
+  displayLatest();
   event.preventDefault();
 }
 
-function display() {
+function displayLatest() {
   const todoList = document.createElement("li");
-  todoList.innerHTML = todoArray[todoArray.length - 1].todo;
-  listDiv.appendChild(todoList);
+    todoList.innerHTML = todoArray[todoArray.length -1].todo;
+    listDiv.appendChild(todoList);
+}
+
+function display() {
+  todoArray.forEach((element) => {
+    const todoList = document.createElement("li");
+    todoList.innerHTML = element.todo;
+    listDiv.appendChild(todoList);
+  });
 }
 
 function saveData() {
@@ -31,8 +39,8 @@ function saveData() {
 
 function getData() {
   let storageData = JSON.parse(localStorage.getItem("todo"));
-  if(storageData){
-    storageData.forEach(element => {
+  if (storageData) {
+    storageData.forEach((element) => {
       todoArray.push(element);
     });
     display();
