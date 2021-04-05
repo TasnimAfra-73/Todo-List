@@ -15,22 +15,14 @@ function addTodo(event) {
   todoArray.push(inputObject);
   userInput.value = "";
   saveData();
-  displayLatest();
+  display();
   event.preventDefault();
 }
 
-function displayLatest() {
+function display() {
   const todoList = document.createElement("li");
     todoList.innerHTML = todoArray[todoArray.length -1].todo;
     listDiv.appendChild(todoList);
-}
-
-function display() {
-  todoArray.forEach((element) => {
-    const todoList = document.createElement("li");
-    todoList.innerHTML = element.todo;
-    listDiv.appendChild(todoList);
-  });
 }
 
 function saveData() {
@@ -42,7 +34,7 @@ function getData() {
   if (storageData) {
     storageData.forEach((element) => {
       todoArray.push(element);
+      display();
     });
-    display();
   }
 }
