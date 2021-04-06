@@ -2,7 +2,7 @@ let todoArray = [];
 let todoForm = document.getElementById("todoForm");
 let listDiv = document.getElementById("list");
 let userInput = document.getElementById("userInput");
-let todoList = document.getElementById("todoList");
+// let todoList = document.getElementById("todoList");
 todoForm.addEventListener("submit", addTodo);
 getData();
 
@@ -14,19 +14,23 @@ function addTodo(event) {
   let inputObject = { todo: userInput.value, done: false };
   todoArray.push(inputObject);
   userInput.value = "";
-  saveData();
+  localStorage.setItem("todo", JSON.stringify(todoArray));
   display();
   event.preventDefault();
 }
 
 function display() {
+  const todoDiv = document.createElement("div");
   const todoList = document.createElement("li");
-    todoList.innerHTML = todoArray[todoArray.length -1].todo;
-    listDiv.appendChild(todoList);
-}
-
-function saveData() {
-  localStorage.setItem("todo", JSON.stringify(todoArray));
+  todoDiv.appendChild(todoList);
+  const dltbuttn = document.createElement("button");
+  dltbuttn.textContent= "x";
+  dltbuttn.onclick = function(){
+    todoDiv.remove();
+  }
+  todoDiv.appendChild(dltbuttn);
+    todoList.textContent = todoArray[todoArray.length -1].todo;
+    listDiv.appendChild(todoDiv);
 }
 
 function getData() {
@@ -37,4 +41,8 @@ function getData() {
       display();
     });
   }
+}
+
+function deleteTodo() {
+  
 }
