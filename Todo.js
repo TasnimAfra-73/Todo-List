@@ -30,31 +30,27 @@ function display(input) {
   dltbuttn.onclick = function(){
     todoDiv.remove();
     deleteTodo(input);
-    console.log(input);
-    console.log("inside button");
-
   }
     todoList.textContent = todoArray[todoArray.length -1].todo;
     listDiv.appendChild(todoDiv);
 }
 
-function getData() {
+function getData(input) {
+  console.log(input);
+  console.log("getdata");
   let storageData = JSON.parse(localStorage.getItem("todo"));
   if (storageData) {
     storageData.forEach((element) => {
       todoArray.push(element);
-      display();
+      display(element);
     });
   }
 }
 
 function deleteTodo(input) {
-  console.log("inside deletetodo")
-  console.log(input);
   var currentIndex = todoArray.indexOf(input);
   if (currentIndex > -1) {
     todoArray.splice(currentIndex, 1);
   }
-  //store the changes
   localStorage.setItem("todo", JSON.stringify(todoArray));
 }
