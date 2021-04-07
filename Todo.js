@@ -15,20 +15,25 @@ function addTodo(event) {
   todoArray.push(inputObject);
   userInput.value = "";
   localStorage.setItem("todo", JSON.stringify(todoArray));
-  display();
+  display(inputObject);
   event.preventDefault();
 }
 
-function display() {
+function display(input) {
+  console.log(input);
   const todoDiv = document.createElement("div");
   const todoList = document.createElement("li");
   todoDiv.appendChild(todoList);
   const dltbuttn = document.createElement("button");
   dltbuttn.textContent= "x";
+  todoDiv.appendChild(dltbuttn);
   dltbuttn.onclick = function(){
     todoDiv.remove();
+    deleteTodo(input);
+    console.log(input);
+    console.log("inside button");
+
   }
-  todoDiv.appendChild(dltbuttn);
     todoList.textContent = todoArray[todoArray.length -1].todo;
     listDiv.appendChild(todoDiv);
 }
@@ -43,6 +48,13 @@ function getData() {
   }
 }
 
-function deleteTodo() {
-  
+function deleteTodo(input) {
+  console.log("inside deletetodo")
+  console.log(input);
+  var currentIndex = todoArray.indexOf(input);
+  if (currentIndex > -1) {
+    todoArray.splice(currentIndex, 1);
+  }
+  //store the changes
+  localStorage.setItem("todo", JSON.stringify(todoArray));
 }
