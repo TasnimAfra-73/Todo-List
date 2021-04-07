@@ -36,8 +36,6 @@ function display(input) {
 }
 
 function getData(input) {
-  console.log(input);
-  console.log("getdata");
   let storageData = JSON.parse(localStorage.getItem("todo"));
   if (storageData) {
     storageData.forEach((element) => {
