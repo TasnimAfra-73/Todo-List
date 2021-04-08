@@ -2,10 +2,10 @@ let todoArray = [];
 let todoForm = document.getElementById("todoForm");
 let listDiv = document.getElementById("list");
 let userInput = document.getElementById("userInput");
-// let todoList = document.getElementById("todoList");
 todoForm.addEventListener("submit", addTodo);
-getData();
+document.addEventListener("DOMContentLoaded", getData);
 
+//adds new todo to the list
 function addTodo(event) {
   if (userInput.value === "") {
     alert("Add a todo");
@@ -19,23 +19,25 @@ function addTodo(event) {
   event.preventDefault();
 }
 
+//displays todo
 function display(input) {
-  console.log(input);
   const todoDiv = document.createElement("div");
   const todoList = document.createElement("li");
-  todoDiv.appendChild(todoList);
   const dltbuttn = document.createElement("button");
-  dltbuttn.textContent= "x";
+  dltbuttn.textContent = "x";
+  todoList.textContent = todoArray[todoArray.length - 1].todo;
+  todoDiv.appendChild(todoList);
   todoDiv.appendChild(dltbuttn);
-  dltbuttn.onclick = function(){
+  listDiv.appendChild(todoDiv);
+
+  dltbuttn.onclick = function () {
     todoDiv.remove();
     deleteTodo(input);
-  }
-    todoList.textContent = todoArray[todoArray.length -1].todo;
-    listDiv.appendChild(todoDiv);
+  };
 }
 
-function getData(input) {
+//gets todo from local storage
+function getData() {
   let storageData = JSON.parse(localStorage.getItem("todo"));
   if (storageData) {
     storageData.forEach((element) => {
@@ -45,6 +47,7 @@ function getData(input) {
   }
 }
 
+//deletes todo
 function deleteTodo(input) {
   var currentIndex = todoArray.indexOf(input);
   if (currentIndex > -1) {
@@ -52,3 +55,4 @@ function deleteTodo(input) {
   }
   localStorage.setItem("todo", JSON.stringify(todoArray));
 }
+
