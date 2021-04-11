@@ -1,8 +1,11 @@
 let todoArray = [];
 let todoForm = document.getElementById("todoForm");
+let searchForm = document.getElementById("searchForm");
 let listDiv = document.getElementById("list");
 let userInput = document.getElementById("userInput");
+let searchInput = document.getElementById("searchInput");
 todoForm.addEventListener("submit", addTodo);
+searchForm.addEventListener("submit", searchTodo);
 document.addEventListener("DOMContentLoaded", getData);
 
 //adds new todo to the list
@@ -29,7 +32,7 @@ function display(input) {
   dltButton.textContent = "x";
   editButton.textContent = "Edit";
   completeButton.textContent = "Complete";
-  todoList.textContent = todoArray[todoArray.length - 1].todo;
+  todoList.textContent = input.todo;
   todoDiv.appendChild(todoList);
   todoDiv.appendChild(dltButton);
   todoDiv.appendChild(editButton);
@@ -85,3 +88,14 @@ function editTodo(input) {
   localStorage.setItem("todo", JSON.stringify(todoArray));
 }
 
+function searchTodo(event) {
+  listDiv.innerHTML="";
+  var searchText = searchInput.value;
+  todoArray.forEach((element) => {
+    var todo = element.todo;
+    if (todo.includes(searchText)) {
+      display(element);
+    }
+  });
+  event.preventDefault();
+}
