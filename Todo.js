@@ -8,14 +8,7 @@ let updateForm = document.getElementById("update");
 todoForm.addEventListener("submit", addTodo);
 searchForm.addEventListener("submit", searchTodo);
 document.addEventListener("DOMContentLoaded", getData);
-// searchForm.addEventListener("keyup", function (event) {
-//   listDiv.innerHTML = "";
-//   if (searchInput.value === "") {
-//     listDiv.innerHTML = "";
-//     getData();
-//   }
-//   event.preventDefault();
-// });
+
 
 //adds new todo to the list
 function addTodo(event) {
