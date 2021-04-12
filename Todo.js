@@ -74,12 +74,6 @@ function display(input) {
       localStorage.setItem("todo", JSON.stringify(todoArray));
     };
   };
-  // updateButton.onclick = function (element) {
-  //   console.log(userInput.value);
-  //   todoList.innerHTML = userInput.value;
-  //   localStorage.setItem("todo", JSON.stringify(todoArray));
-  //   element.preventDefault();
-  // };
 
   //mark a todo as complete
   completeButton.onclick = function () {
@@ -110,7 +104,7 @@ function deleteTodo(input) {
   localStorage.setItem("todo", JSON.stringify(todoArray));
 }
 
-function updateTodo(input) {}
+
 
 function searchTodo(event) {
   listDiv.innerHTML = "";
