@@ -4,9 +4,18 @@ let searchForm = document.getElementById("searchForm");
 let listDiv = document.getElementById("list");
 let userInput = document.getElementById("userInput");
 let searchInput = document.getElementById("searchInput");
+let updateForm = document.getElementById("update");
 todoForm.addEventListener("submit", addTodo);
 searchForm.addEventListener("submit", searchTodo);
 document.addEventListener("DOMContentLoaded", getData);
+// searchForm.addEventListener("keyup", function (event) {
+//   listDiv.innerHTML = "";
+//   if (searchInput.value === "") {
+//     listDiv.innerHTML = "";
+//     getData();
+//   }
+//   event.preventDefault();
+// });
 
 //adds new todo to the list
 function addTodo(event) {
@@ -29,7 +38,7 @@ function display(input) {
   const dltButton = document.createElement("button");
   const editButton = document.createElement("button");
   const completeButton = document.createElement("button");
-  dltButton.textContent = "x";
+  dltButton.textContent = "Delete";
   editButton.textContent = "Edit";
   completeButton.textContent = "Complete";
   todoList.textContent = input.todo;
@@ -39,18 +48,47 @@ function display(input) {
   todoDiv.appendChild(completeButton);
   listDiv.appendChild(todoDiv);
 
+  //checks if the task is done
   if (input.isDone) {
     var task = input.todo;
     todoList.innerHTML = task.strike();
   }
 
+  //deletes selected todo
   dltButton.onclick = function () {
     todoDiv.remove();
     deleteTodo(input);
   };
   editButton.onclick = function () {
-    // editTodo(input);
+    const updatedText = document.createElement("input");
+    const updateButton = document.createElement("button");
+    const p = document.createElement("p");
+    updateButton.textContent = "Update";
+    todoDiv.appendChild(p);
+    todoDiv.appendChild(updatedText);
+    todoDiv.appendChild(updateButton);
+    updatedText.value = input.todo;
+    updateButton.onclick = function () {
+      todoList.innerHTML = updatedText.value;
+      updatedText.remove();
+      updateButton.remove();
+      p.remove();
+      input.todo = updatedText.value;
+      if (input.isDone) {
+        var task = input.todo;
+        todoList.innerHTML = task.strike();
+      }    
+      localStorage.setItem("todo", JSON.stringify(todoArray));
+    };
   };
+  // updateButton.onclick = function (element) {
+  //   console.log(userInput.value);
+  //   todoList.innerHTML = userInput.value;
+  //   localStorage.setItem("todo", JSON.stringify(todoArray));
+  //   element.preventDefault();
+  // };
+
+  //mark a todo as complete
   completeButton.onclick = function () {
     var task = input.todo;
     todoList.innerHTML = task.strike();
@@ -79,17 +117,10 @@ function deleteTodo(input) {
   localStorage.setItem("todo", JSON.stringify(todoArray));
 }
 
-function editTodo(input) {
-  var currentIndex = todoArray.indexOf(input);
-  current;
-  if (currentIndex > -1) {
-    todoArray.splice(currentIndex, 1, userInput.value);
-  }
-  localStorage.setItem("todo", JSON.stringify(todoArray));
-}
+function updateTodo(input) {}
 
 function searchTodo(event) {
-  listDiv.innerHTML="";
+  listDiv.innerHTML = "";
   var searchText = searchInput.value;
   todoArray.forEach((element) => {
     var todo = element.todo;
